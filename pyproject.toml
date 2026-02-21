@@ -1,6 +1,9 @@
 [project]
 name = "securechat"
+description = "Secure Chat Application"
 version = "1.0.0"
+readme = "README.md"
+requires-python = ">=3.7"
 dependencies = [
     "toga",
     "cryptography",
@@ -12,4 +15,16 @@ securechat = "app:main"
 [tool.briefcase]
 project_name = "SecureChat"
 bundle = "org.securechat"
-version = "1.0"  
+version = "1.0"
+url = "https://example.com"
+license = "MIT"
+author = "Your Name"
+author_email = "your@email.com"
+
+[tool.briefcase.app.securechat]
+formal_name = "Secure Chat"
+description = "Secure messaging application"
+sources = ["."]
+
+[tool.briefcase.app.securechat.iOS]
+requires = []
