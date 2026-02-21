@@ -1,0 +1,15 @@
+[project]
+name = "securechat"
+version = "1.0.0"
+dependencies = [
+    "toga",
+    "cryptography",
+]
+
+[project.scripts]
+securechat = "app:main"
+
+[tool.briefcase]
+project_name = "SecureChat"
+bundle = "org.securechat"
+version = "1.0"  
