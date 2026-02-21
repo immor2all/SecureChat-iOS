@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [project.scripts]
-securechat = "app:main"
+securechat = "securechat.app:main"
 
 [tool.briefcase]
 project_name = "SecureChat"
@@ -24,7 +24,7 @@ author_email = "your@email.com"
 [tool.briefcase.app.securechat]
 formal_name = "Secure Chat"
 description = "Secure messaging application"
-sources = ["."]
+sources = ["src/securechat"]
 
 [tool.briefcase.app.securechat.iOS]
 requires = []
