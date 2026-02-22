@@ -22,16 +22,27 @@ jobs:
         run: |
           briefcase create iOS
           briefcase build iOS
-          briefcase package iOS --adhoc-sign
+          briefcase package iOS
           
-      - name: Find IPA
+      - name: Debug - List all files
         run: |
-          echo "Looking for IPA files..."
+          echo "=== Listing all files ==="
+          find . -type f | head -50
+          echo "=== Looking for IPA and APP ==="
           find . -name "*.ipa" -type f
+          find . -name "*.app" -type f
+          echo "=== Looking in Xcode build folder ==="
+          ls -la ./iOS/Xcode/build/ || true
+          ls -la ./iOS/Xcode/build/Release-iphoneos/ || true
+          ls -la ./iOS/Xcode/build/Debug-iphoneos/ || true
           
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
           name: SecureChat-iOS
           path: |
+            ./iOS/Xcode/build/Release-iphoneos/*.ipa
+            ./iOS/Xcode/build/Debug-iphoneos/*.ipa
+            ./iOS/Xcode/build/*.ipa
             **/*.ipa
+            **/*.app
