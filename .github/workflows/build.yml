@@ -24,17 +24,31 @@ jobs:
           briefcase build iOS
           briefcase package iOS
           
-      - name: Find IPA
+      - name: Find everything
         run: |
-          echo "=== Looking in build folder ==="
-          find ./build -name "*.ipa" -type f
-          echo "=== Looking in all folders ==="
+          echo "=== CURRENT DIRECTORY ==="
+          pwd
+          echo "=== LIST ALL FILES ==="
+          find . -type f | head -200
+          echo "=== SEARCH FOR IPA ==="
           find . -name "*.ipa" -type f
+          echo "=== SEARCH FOR APP ==="
+          find . -name "*.app" -type f
+          echo "=== SEARCH FOR XCODEPROJ ==="
+          find . -name "*.xcodeproj" -type d
+          echo "=== CHECK BUILD FOLDER ==="
+          ls -la ./build/ || true
+          ls -la ./build/securechat/ || true
+          ls -la ./build/securechat/ios/ || true
+          ls -la ./build/securechat/ios/xcode/ || true
           
-      - name: Upload IPA
+      - name: Upload any found files
         uses: actions/upload-artifact@v4
         with:
           name: SecureChat-iOS
           path: |
             ./build/**/*.ipa
+            ./build/**/*.app
             ./**/*.ipa
+            ./**/*.app
+
