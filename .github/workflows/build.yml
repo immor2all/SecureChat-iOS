@@ -18,37 +18,24 @@ jobs:
           pip install --upgrade pip
           pip install briefcase toga cryptography
           
-      - name: Build iOS app
+      - name: Build iOS app for device
         run: |
           briefcase create iOS
-          briefcase build iOS
-          briefcase package iOS
+          briefcase build iOS --device "iPhone"
+          briefcase package iOS --device "iPhone" --adhoc-sign
           
-      - name: Find everything
+      - name: Find IPA
         run: |
-          echo "=== CURRENT DIRECTORY ==="
-          pwd
-          echo "=== LIST ALL FILES ==="
-          find . -type f | head -200
-          echo "=== SEARCH FOR IPA ==="
+          echo "=== Looking for IPA ==="
           find . -name "*.ipa" -type f
-          echo "=== SEARCH FOR APP ==="
-          find . -name "*.app" -type f
-          echo "=== SEARCH FOR XCODEPROJ ==="
-          find . -name "*.xcodeproj" -type d
-          echo "=== CHECK BUILD FOLDER ==="
-          ls -la ./build/ || true
-          ls -la ./build/securechat/ || true
-          ls -la ./build/securechat/ios/ || true
-          ls -la ./build/securechat/ios/xcode/ || true
+          echo "=== Looking in build folder ==="
+          find ./build -name "*.ipa" -type f
           
-      - name: Upload any found files
+      - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
           name: SecureChat-iOS
           path: |
             ./build/**/*.ipa
-            ./build/**/*.app
             ./**/*.ipa
-            ./**/*.app
 
