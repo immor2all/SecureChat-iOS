@@ -16,7 +16,7 @@ securechat = "securechat.app:main"
 project_name = "SecureChat"
 bundle = "org.securechat"
 version = "1.0"
-url = "https://example.com"
+url = "https://github.com/immor2all/SecureChat-iOS"
 license = "MIT"
 author = "Your Name"
 author_email = "your@email.com"
@@ -28,3 +28,4 @@ sources = ["src/securechat"]
 
 [tool.briefcase.app.securechat.iOS]
 requires = []
+device_type = "iPhone"
